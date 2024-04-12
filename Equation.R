@@ -61,7 +61,7 @@ se = summary(glm(cars_calc$Died~cars_calc$intercept,data=cars_calc,family="binom
 ll=slope - 1.96*se;ll;ul=slope + 1.96*se;ul
 
 ### boxplot ###
-tiff("R:/Data Warehouse Team/Jobs By Name/KingsleyViveck/boxplot.tiff", height = 10, width = 10, units ='in', res=300)
+tiff("R:/boxplot.tiff", height = 10, width = 10, units ='in', res=300)
 par(mfrow=c(4,4), mar=c(4,4,1.5,1.5), oma=c(1.5,2,1,1))
 cars_calc$diedf <- factor(cars_calc$Died, labels= c("Alive", "Died"))
 boxplot(cars_calc$age~cars_calc$diedf, xlab = "", ylab = "", outline=FALSE,ylim=c(0,110))
@@ -97,7 +97,7 @@ title("Diastolic Pressure (mmHg)")
 dev.off()
 
 #### line plot ###
-tiff("R:/Data Warehouse Team/Jobs By Name/KingsleyViveck/lineplot.tiff", height = 10, width = 10, units = 'in', res=300)
+tiff("R:/lineplot.tiff", height = 10, width = 10, units = 'in', res=300)
 par(mfrow=c(4,4), mar=c(4,4,1.5,1.5), oma=c(1.5,2,1,1))
 library(Hmisc)
 x <- cut2(cars_calc$age, levels.mean=TRUE, g=8)
