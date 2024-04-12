@@ -4,8 +4,8 @@ install.packages("tidyverse")
 library(dplyr)
 library(tidyr)
 
-cars_data <- read.csv("R:/Data Warehouse Team/Jobs By Name/KingsleyViveck/CARSCalculationFullViv2.csv")
-cars_full <- read.csv("R:/Data Warehouse Team/Jobs By Name/KingsleyViveck/ObsTesting Viveck (Changed).csv")
+cars_data <- read.csv("R:/CARSCalculationFullViv2.csv")
+cars_full <- read.csv("R:/ObsTesting(Changed).csv")
 
 #Converting 'NULL' strings into NA values
 cars_data$NEWSScore[cars_data$NEWSScore == "NULL"] <- NA
@@ -52,7 +52,7 @@ filled_cars <- sorted_cars %>%
 #Filtering results for unique account numbers. 
 filtered_cars <- filled_cars %>%
   distinct(AccountNumber, .keep_all = TRUE)
-write.csv(filtered_cars, "R:/Data Warehouse Team/Jobs By Name/KingsleyViveck/FilteredCars.csv")
+write.csv(filtered_cars, "R:/FilteredCars.csv")
 
 #Joining filled and filtered observation data with blood test data based on patient account number
 cars_merged <- left_join(cars_data, filtered_cars, by = "AccountNumber")
@@ -63,7 +63,7 @@ cars_final$FlowRate[cars_final$OxygenSupplementation != "On Air" & cars_final$Fl
 cars_final$FlowRate[cars_final$OxygenSupplementation == "On Air" & cars_final$FlowRate == "NULL"] <- 0
 cars_final$FlowRate[cars_final$FlowRate == "NULL"] <- NA
 
-write.csv(cars_final, "R:/Data Warehouse Team/Jobs By Name/KingsleyViveck/FinalCARS1.csv")
+write.csv(cars_final, "R:/FinalCARS1.csv")
 
 #########################################################################################################
 #Converting chr into num
@@ -126,7 +126,7 @@ cars_clean <- cars_clean %>%
   mutate(Flag = ifelse(rowSums(is.na(.)) > 0, 1, 0))
 sum(cars_clean$Flag, na.rm = TRUE)
 
-write.csv(cars_clean, "R:/Data Warehouse Team/Jobs By Name/KingsleyViveck/CleanedCARS1.csv")
+write.csv(cars_clean, "R:/CleanedCARS1.csv")
 
 
 #Converting str dates to POSIXct
